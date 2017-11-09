@@ -25,7 +25,6 @@ class List {
     type getFront();
     type getRear();
     bool isEmpty();
-
 };
 
 
@@ -95,16 +94,16 @@ void List<type>::addToRear(type value) {
 template <class type>
 void List<type>::insert(type search ,type value) {
 
-    Node<type> *p = Head;
+  Node<type> *p = Head;
 
-    while(p->data != search) {
+  while(p->data != search) {
       p = p->next;
-    }
+  }
 
-    Node<type> *n = new Node<type>;
-    n->data = value;
-    n->next = p->next;
-    p->next = n;
+  Node<type> *n = new Node<type>;
+  n->data = value;
+  n->next = p->next;
+  p->next = n;
 }
 
 
@@ -165,17 +164,18 @@ void List<type>::deleteNode(type search) {
 template <class type>
 type List<type>::findNode(type search) {
 
-    Node<type> *p = Head;
+  Node<type> *p = Head;
 
-    while(p->next != search) {
-      p = p->next;
+  while(p->next != search) {
+    p = p->next;
 
-      if(p == NULL)
-        return NULL;
-      else if(p->data == search)
-          return p->data;
+    if(p == NULL)
+      return NULL;
+    else if(p->data == search)
+      return p->data;
+
     }
-    return NULL;
+  return NULL;
 }
 
 
@@ -188,10 +188,10 @@ type List<type>::findNode(type search) {
 template <class type>
 type List<type>::getFront() {
 
-    if(isEmpty())
-      return NULL;
-    else
-      return Head->data;
+  if(isEmpty())
+    return NULL;
+  else
+    return Head->data;
 }
 
 
@@ -204,10 +204,10 @@ type List<type>::getFront() {
 template <class type>
 type List<type>::getRear() {
 
-    if(isEmpty())
-      return NULL;
-    else
-      return Tail->data;
+  if(isEmpty())
+    return NULL;
+  else
+    return Tail->data;
 }
 
 
@@ -220,10 +220,10 @@ type List<type>::getRear() {
 template <class type>
 bool List<type>::isEmpty() {
 
-    if(Head == NULL)
-      return true;
-    else
-      return false;
+  if(Head == NULL)
+    return true;
+  else
+    return false;
 }
 
 #endif
