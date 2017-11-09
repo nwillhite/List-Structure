@@ -25,7 +25,7 @@ class Stack : private List<type>
 */
 template <class type>
 void Stack<type>::push(type value) {
-    this->addToFront(value);
+  this->addToFront(value);
 }
 
 
