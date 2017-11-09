@@ -1,9 +1,3 @@
-/*
-  Function
-  Descrition:
-  Inputs:
-  Outputs:
-*/
 
 #ifndef LIST
 #define LIST
@@ -26,7 +20,7 @@ class List {
     void addToFront(type value);
     void addToRear(type value);
     void insert(type search, type value);
-
+    void deleteNode(type search);
     type findNode(type search);
     type getFront();
     type getRear();
@@ -52,7 +46,7 @@ List<type>::List()
   Function addToFront(type value)
   Descrition:
   Inputs:
-  Outputs:
+  Outputs: None
 */
 template <class type>
 void List<type>::addToFront(type value) {
@@ -74,7 +68,7 @@ void List<type>::addToFront(type value) {
   Function addToRear(type value)
   Descrition:
   Inputs:
-  Outputs:
+  Outputs: None
 */
 template <class type>
 void List<type>::addToRear(type value) {
@@ -96,44 +90,92 @@ void List<type>::addToRear(type value) {
   Function insert(type search ,type value)
   Descrition:
   Inputs:
-  Outputs:
+  Outputs: None
 */
 template <class type>
 void List<type>::insert(type search ,type value) {
 
-  Node<type> *p = Head;
+    Node<type> *p = Head;
 
-  while(p->data != search) {
-    p = p->next;
-  }
+    while(p->data != search) {
+      p = p->next;
+    }
 
-  Node<type> *n = new Node<type>;
-  n->data = value;
-  n->next = p->next;
-  p->next = n;
+    Node<type> *n = new Node<type>;
+    n->data = value;
+    n->next = p->next;
+    p->next = n;
 }
 
 
 /*
-  Function findNode(type search)
+  Function deleteNode(type search)
   Descrition:
-  Inputs:
-  Outputs:
+  Inputs: 'search', is the Node that is to be deleted
+  Outputs: None
 */
+template <class type>
+void List<type>::deleteNode(type search) {
+
+  if(Head->data == search) {
+    Node<type> *delPtr = Head;
+
+    if(Head == Tail)
+      Head = Tail = 0;
+    else
+      Head = Head->next;
+
+    delete delPtr;
+  }
+  else if(Tail->data == search) {
+    Node<type> *delPtr = Tail;
+    Node<type> *p = Head;
+
+    while(p->next != Tail) {
+      p = p->next;
+    }
+
+    Tail = p;
+    p->next = 0;
+
+    delete delPtr;
+  }
+  else {
+    Node<type> *p = Head;
+
+    while([p->next->data != search) {
+        p = p->next;
+    }
+
+    Node<type> *delPtr = p->next;
+    p->next = p->next->next;
+    delete delPtr;
+  }
+}
+
+
+
+/*
+  Function findNode(type search)
+  Descrition: Will search for a Node and will return it's data member if it
+  exists or it will return NULL
+  Inputs: search', is the Node that is to be found
+  Outputs: return the node if found, or it will return NULL
+*/
+template <class type>
 type List<type>::findNode(type search) {
 
-  Node<type> *p = Head;
+    Node<type> *p = Head;
 
-  while(p->data != search) {
-    p = p->next;
+    while(p->next != search) {
+      p = p->next;
 
-    if(p == NULL)
-      return NULL;
-    else if(p->data == search)
-        return p->data;
-  }
-
-  return NULL;
+      if(p == NULL)
+        return NULL;
+      else if(p->data == search)
+          return p->data;
+    }
+    return NULL;
 }
 
 
@@ -143,12 +185,13 @@ type List<type>::findNode(type search) {
   Inputs: None
   Outputs: Either NULL is list is empty or the data at the Head of the list
 */
+template <class type>
 type List<type>::getFront() {
 
-  if(isEmpty())
-    return NULL;
-  else
-    return Head->data;
+    if(isEmpty())
+      return NULL;
+    else
+      return Head->data;
 }
 
 
@@ -158,12 +201,13 @@ type List<type>::getFront() {
   Inputs: None
   Outputs: Either NULL is list is empty or the data at the Tail of the list
 */
+template <class type>
 type List<type>::getRear() {
 
-  if(isEmpty())
-    return NULL;
-  else
-    return Tail->data;
+    if(isEmpty())
+      return NULL;
+    else
+      return Tail->data;
 }
 
 
@@ -173,12 +217,13 @@ type List<type>::getRear() {
   Inputs: None
   Outputs: True if Head pointer has no data, false if Head pointer has data
 */
+template <class type>
 bool List<type>::isEmpty() {
 
-  if(Head == NULL)
-    return true;
-  else
-    return false;
+    if(Head == NULL)
+      return true;
+    else
+      return false;
 }
 
 #endif
