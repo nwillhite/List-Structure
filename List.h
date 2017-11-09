@@ -166,7 +166,7 @@ type List<type>::findNode(type search) {
 
   Node<type> *p = Head;
 
-  while(p->next != search) {
+  while(p->data != search) {
     p = p->next;
 
     if(p == NULL)
